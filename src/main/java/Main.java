@@ -1,36 +1,36 @@
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Main {
     static Channels channels = new Channels();
 
     public static void main(String[] args) throws IOException {
         List<String> list = Files.readAllLines(new File("src/main/resources/schedule.txt").toPath(), Charset.defaultCharset());
+        try {
 
-        start(list);
-        channels.showProgramsByTitle("Слово пастыря");
-        System.out.println();
 
-        BroadcastsTime time = new BroadcastsTime((byte) 10, (byte) 15);
-        channels.showProgramsByCurrentTime(time);
-        System.out.println();
+            start(list);
+            channels.showProgramsByTitle("Слово пастыря");
+            System.out.println();
 
-        BroadcastsTime time2 = new BroadcastsTime((byte) 8, (byte) 25);
-        channels.showProgramsByChannelCurrentTime("#Культура", time2);
-        System.out.println();
+            BroadcastsTime time = new BroadcastsTime((byte) 10, (byte) 15);
+            channels.showProgramsByCurrentTime(time);
+            System.out.println();
 
-        BroadcastsTime timeS = new BroadcastsTime((byte) 11, (byte) 15);
-        BroadcastsTime timeE = new BroadcastsTime((byte) 18, (byte) 15);
-        channels.showProgramsByChannelsIntervalTime("#Первый", timeS, timeE);
-        System.out.println();
+            BroadcastsTime time2 = new BroadcastsTime((byte) 8, (byte) 25);
+            channels.showProgramsByChannelCurrentTime("#Культура", time2);
+            System.out.println();
+
+            BroadcastsTime timeS = new BroadcastsTime((byte) 11, (byte) 15);
+            BroadcastsTime timeE = new BroadcastsTime((byte) 18, (byte) 15);
+            channels.showProgramsByChannelsIntervalTime("#Первый", timeS, timeE);
+            System.out.println();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
     }
 
